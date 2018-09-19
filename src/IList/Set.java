@@ -1,6 +1,6 @@
 package IList;
 
-public class Set implements List{
+public class Set implements List {
     @Override
     public boolean add(Object o) {
         return false;
@@ -32,8 +32,19 @@ public class Set implements List{
     }
 
     @Override
+    public boolean setSize(int size) {
+        return false;
+    }
+
+    @Override
     public int getSize() {
-        return 0;
+        int size = 0;
+        for (Object o : List.oArray
+                ) {
+            size++;
+
+        }
+        return size;
     }
 
     @Override
@@ -65,4 +76,10 @@ public class Set implements List{
     public boolean isEmpty() {
         return false;
     }
+
+    @Override
+    public Object[] doubleLength(Object[] oPrevArray) {
+        return new Object[0];
+    }
+
 }
