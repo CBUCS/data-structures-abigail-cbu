@@ -28,6 +28,9 @@ public class Main {
         testLinked.add("second");
         testLinked.add("third");
 
-        System.out.println("Size: " + testLinked.getSize());
+        System.out.println("Size: " + testLinked.getNumObjects());
+
+        for(int i = 0; i < testLinked.getNumObjects(); i++)
+            System.out.println(i + ": " + testLinked.get(i));
     }
 }

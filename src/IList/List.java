@@ -1,11 +1,7 @@
 package IList;
 
 public interface List {
-
-    static final int MIN_SIZE = 1;
-    static final int CURRENT_SIZE = MIN_SIZE;
-
-    Object[] oArray = new Object[MIN_SIZE];
+    static final int STARTING_SIZE = 2;
 
     boolean setSize(int size);
 
@@ -21,11 +17,11 @@ public interface List {
 
     Object[] removeAll();
 
-    int getSize();
+    int getNumObjects();
 
     boolean contains(Object o);
 
-    Object[] toArray();
+    Object get(int index);
 
     boolean swap(int index1, int index2);
 

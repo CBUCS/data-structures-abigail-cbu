@@ -1,34 +1,60 @@
 package IList;
 
 public class LinkedList implements List {
+
+    private Object[] oArray;
+    private int CURRENT_SIZE = 0;
+
+    public LinkedList () {
+        oArray = new Object[List.STARTING_SIZE];
+    }
+
     @Override
     public boolean setSize(int size) {
         return false;
     }
 
+    /**
+     * Adds Object to the end of the LinkedList
+     * @param o
+     * @return true if object was added;
+     * false if there is no LinkList to add to
+     */
     @Override
     public boolean add(Object o) {
-        int size = getSize();
+        int size = getNumObjects();
 
         if (size == 0) {
-            List.oArray[size] = o;
-            doubleLength(List.oArray);
+            oArray[size] = o;
+            oArray = doubleLength(oArray);
         }
         else
-            List.oArray[size - 1] = o;
-        
+            oArray[size - 1] = o;
+
+        if(getNumObjects() > (CURRENT_SIZE/2))
+            oArray = doubleLength(oArray);
+
         return true;
     }
 
-
+    /**
+     * Add an entire Object[] to the back of the LinkedList
+     * @param oRange
+     * @return true if successful
+     */
     @Override
     public boolean addRange(Object[] oRange) {
         return false;
     }
 
+    /**
+     * Removed the last object in LinkedList
+     * @param o
+     * @return true if successful
+     */
     @Override
     public boolean remove(Object o) {
-        if (getSize() > 0) {
+        if (getNumObjects() > 0) {
             if (contains(o)) {
                 int i = indexOf(o);
                 if (i < 0)
@@ -40,13 +66,28 @@ public class LinkedList implements List {
         return false;
     }
 
+    /**
+     * Gets object from specified index
+     * @param index
+     * @return can return null if doesn't exist
+     */
+    @Override
+    public Object get(int index) {
+        return oArray[index];
+    }
+
+    /**
+     * Removes ojbect at specified index
+     * @param index
+     * @return true if successful
+     */
     @Override
     public boolean removeAtIndex(int index) {
-        int currentSize = getSize();
-        if (List.oArray[index] != null) {
-            Object[] tmp = List.oArray;
+        int currentSize = getNumObjects();
+        if (oArray[index] != null) {
+            Object[] tmp = oArray;
             for (int i = index; i < currentSize - 2; i++) {
-                List.oArray[i] = tmp[i + 1];
+                oArray[i] = tmp[i + 1];
             }
             return true;
         } else {
@@ -54,16 +95,24 @@ public class LinkedList implements List {
         }
     }
 
+    /**
+     * Removes all objects in LinkedList
+     * @return new object list
+     */
     @Override
     public Object[] removeAll() {
-        return new Object[getSize()];
+        return new Object[getNumObjects()];
     }
 
+    /**
+     * Get current size of LinkedList
+     * @return int: size
+     */
     @Override
-    public int getSize() {
+    public int getNumObjects() {
         int size = 0;
-        if (List.oArray != null) {
-            for (Object o : List.oArray
+        if (oArray != null) {
+            for (Object o : oArray
                     ) {
                 if (o != null)
                     size++;
@@ -73,9 +122,14 @@ public class LinkedList implements List {
         return size;
     }
 
+    /**
+     * Checks for the first existence of object in LinkedList
+     * @param o
+     * @return
+     */
     @Override
     public boolean contains(Object o) {
-        for (Object x : List.oArray) {
+        for (Object x : oArray) {
             if (o == x)
                 return true;
         }
@@ -83,14 +137,9 @@ public class LinkedList implements List {
     }
 
     @Override
-    public Object[] toArray() {
-        return List.oArray;
-    }
-
-    @Override
     public boolean addAtIndex(int index, Object o) {
-        if (getSize() > index && index > 0) {
-            List.oArray[index] = o;
+        if (getNumObjects() > index && index > 0) {
+            oArray[index] = o;
             return true;
         }
         return false;
@@ -98,10 +147,10 @@ public class LinkedList implements List {
 
     @Override
     public boolean swap(int index1, int index2) {
-        if (List.oArray[index1] != null && List.oArray[index2] != null) {
-            Object tmp = List.oArray[index1];
-            List.oArray[index1] = List.oArray[index2];
-            List.oArray[index2] = tmp;
+        if (oArray[index1] != null && oArray[index2] != null) {
+            Object tmp = oArray[index1];
+            oArray[index1] = oArray[index2];
+            oArray[index2] = tmp;
             return true;
         }
         return false;
@@ -110,7 +159,7 @@ public class LinkedList implements List {
     @Override
     public int indexOf(Object o) {
         int counter = 0;
-        for (Object x : List.oArray) {
+        for (Object x : oArray) {
             if (o == x)
                 return counter;
             counter++;
@@ -120,7 +169,7 @@ public class LinkedList implements List {
 
     @Override
     public boolean isEmpty() {
-        if (List.oArray == null || getSize() == 0)
+        if (oArray == null || getNumObjects() == 0)
             return true;
         else
             return false;
@@ -128,6 +177,12 @@ public class LinkedList implements List {
 
     @Override
     public Object[] doubleLength(Object[] oPrevArray) {
-        return new Object[0];
+        int prevSize = getNumObjects();
+        CURRENT_SIZE = prevSize * 2;
+        Object[] newOArray = new Object[CURRENT_SIZE];
+
+        for(int i = 0; i < prevSize; i++)
+            newOArray[i] = oPrevArray[i];
+        return newOArray;
     }
 }

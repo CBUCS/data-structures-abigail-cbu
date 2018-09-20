@@ -1,13 +1,24 @@
 package IList;
 
 public class Queue implements List {
+    @Override
+    public Object get(int index) {
+        return null;
+    }
+
+    @Override
+    public boolean setSize(int size) {
+        return false;
+    }
 
     @Override
     public boolean add(Object o) {
-        int size = getSize();
+        return false;
+    }
 
-        List.oArray[size - 1] = o;
-        return true;
+    @Override
+    public boolean addAtIndex(int index, Object o) {
+        return false;
     }
 
     @Override
@@ -27,42 +38,16 @@ public class Queue implements List {
 
     @Override
     public Object[] removeAll() {
-        int currentSize = getSize();
-        return new Object[currentSize];
-    }
-
-    @Override
-    public boolean setSize(int size) {
-        return false;
-    }
-
-    @Override
-    public int getSize() {
-        int size = 0;
-        for (Object o : List.oArray
-                ) {
-            size++;
-
-        }
-        return size;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        for (Object x : List.oArray) {
-            if (o == x)
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public Object[] toArray() {
         return new Object[0];
     }
 
     @Override
-    public boolean addAtIndex(int index, Object o) {
+    public int getNumObjects() {
+        return 0;
+    }
+
+    @Override
+    public boolean contains(Object o) {
         return false;
     }
 
@@ -85,5 +70,4 @@ public class Queue implements List {
     public Object[] doubleLength(Object[] oPrevArray) {
         return new Object[0];
     }
-
 }
