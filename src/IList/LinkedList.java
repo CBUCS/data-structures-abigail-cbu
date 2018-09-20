@@ -109,7 +109,7 @@ public class LinkedList implements List {
         int currentSize = getNumObjects();
         if (oArray[index] != null) {
             Object[] tmp = oArray;
-            for (int i = index; i < currentSize - 2; i++) {
+            for (int i = index; i < currentSize; i++) {
                 oArray[i] = tmp[i + 1];
             }
             return true;
@@ -124,8 +124,10 @@ public class LinkedList implements List {
      * @return new object list
      */
     @Override
-    public Object[] removeAll() {
-        return new Object[getNumObjects()];
+    public boolean removeAll() {
+        for(Object o : oArray)
+            remove(o);
+        return true;
     }
 
     /**
@@ -162,6 +164,12 @@ public class LinkedList implements List {
         return false;
     }
 
+    /**
+     * Add Object at specified index into LinkedList
+     * @param index
+     * @param o
+     * @return
+     */
     @Override
     public boolean addAtIndex(int index, Object o) {
         if (getNumObjects() > index && index > 0) {
@@ -171,6 +179,13 @@ public class LinkedList implements List {
         return false;
     }
 
+    /**
+     * Replace object at index1 with object at index2
+     * Replace object at index2 with object at index1
+     * @param index1
+     * @param index2
+     * @return
+     */
     @Override
     public boolean swap(int index1, int index2) {
         if (oArray[index1] != null && oArray[index2] != null) {
@@ -182,6 +197,11 @@ public class LinkedList implements List {
         return false;
     }
 
+    /**
+     * Get the index of the object's first occurence in the LinkedList
+     * @param o
+     * @return
+     */
     @Override
     public int indexOf(Object o) {
         int counter = 0;
@@ -193,6 +213,10 @@ public class LinkedList implements List {
         return -1;
     }
 
+    /**
+     * Checks if there are any objects in the linkedlist
+     * @return true if there are no objects in linkedlist
+     */
     @Override
     public boolean isEmpty() {
         if (oArray == null || getNumObjects() == 0)
@@ -201,6 +225,11 @@ public class LinkedList implements List {
             return false;
     }
 
+    /**
+     * Resizes array by doubling the current size
+     * @param oPrevArray
+     * @return
+     */
     @Override
     public Object[] doubleLength(Object[] oPrevArray) {
         Object[] newOArray;

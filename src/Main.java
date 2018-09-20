@@ -24,13 +24,35 @@ public class Main {
         //List
         List testLinked = new LinkedList();
 
+        System.out.println("--- Adding ---");
+
         testLinked.add("first");
         testLinked.add("second");
         testLinked.add("third");
 
         System.out.println("Size: " + testLinked.getNumObjects());
 
-        for(int i = 0; i < testLinked.getNumObjects(); i++)
-            System.out.println(i + ": " + testLinked.get(i));
+        DisplayResults(testLinked);
+
+        System.out.println("--- Removing ---");
+        testLinked.remove("second");
+
+        DisplayResults(testLinked);
+
+        System.out.println("isEmpty(): " + testLinked.isEmpty());
+
+        testLinked.removeAtIndex(0);
+
+        DisplayResults(testLinked);
+
+        testLinked.removeAll();
+
+        System.out.println("isEmpty(): " + testLinked.isEmpty());
+    }
+
+    public static void DisplayResults(List x) {
+        for(int i = 0; i < x.getNumObjects(); i++)
+            System.out.println(i + ": " + x.get(i));
+
     }
 }

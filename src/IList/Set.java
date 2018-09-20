@@ -37,9 +37,10 @@ public class Set implements List {
     }
 
     @Override
-    public Object[] removeAll() {
-        return new Object[0];
+    public boolean removeAll() {
+        return false;
     }
+
 
     @Override
     public int getNumObjects() {

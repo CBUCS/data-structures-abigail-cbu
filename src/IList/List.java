@@ -15,7 +15,7 @@ public interface List {
 
     boolean removeAtIndex(int index);
 
-    Object[] removeAll();
+    boolean removeAll();
 
     int getNumObjects();
 
