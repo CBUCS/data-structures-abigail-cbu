@@ -26,6 +26,15 @@ public class LinkedList implements List {
 
     @Override
     public boolean remove(Object o) {
+        if (getSize() > 0) {
+            if (contains(o)) {
+                int i = indexOf(o);
+                if (i < 0)
+                    return false;
+                else
+                    removeAtIndex(i);
+            }
+        }
         return false;
     }
 
@@ -70,27 +79,46 @@ public class LinkedList implements List {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return List.oArray;
     }
 
     @Override
     public boolean replace(int index, Object o) {
+        if (getSize() > index && index > 0) {
+            List.oArray[index] = o;
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean swap(int index1, int index2) {
+        if (List.oArray[index1] != null && List.oArray[index2] != null) {
+            Object tmp = List.oArray[index1];
+            List.oArray[index1] = List.oArray[index2];
+            List.oArray[index2] = tmp;
+            return true;
+        }
         return false;
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        int counter = 0;
+        for (Object x : List.oArray) {
+            if (o == x)
+                return counter;
+            counter++;
+        }
+        return -1;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        if (List.oArray == null || getSize() == 0)
+            return true;
+        else
+            return false;
     }
 
     @Override
