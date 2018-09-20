@@ -11,11 +11,6 @@ public class Queue implements List {
     }
 
     @Override
-    public boolean addAtIndex(int index) {
-        return false;
-    }
-
-    @Override
     public boolean addRange(Object[] oRange) {
         return false;
     }
@@ -67,7 +62,7 @@ public class Queue implements List {
     }
 
     @Override
-    public boolean replace(int index, Object o) {
+    public boolean addAtIndex(int index, Object o) {
         return false;
     }
 

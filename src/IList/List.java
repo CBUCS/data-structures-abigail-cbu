@@ -11,7 +11,7 @@ public interface List {
 
     boolean add(Object o);
 
-    boolean addAtIndex(int index);
+    boolean addAtIndex(int index, Object o);
 
     boolean addRange(Object[] oRange);
 
@@ -26,8 +26,6 @@ public interface List {
     boolean contains(Object o);
 
     Object[] toArray();
-
-    boolean replace(int index, Object o);
 
     boolean swap(int index1, int index2);
 

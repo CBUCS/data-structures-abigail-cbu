@@ -10,14 +10,16 @@ public class LinkedList implements List {
     public boolean add(Object o) {
         int size = getSize();
 
-        List.oArray[size - 1] = o;
+        if (size == 0) {
+            List.oArray[size] = o;
+            doubleLength(List.oArray);
+        }
+        else
+            List.oArray[size - 1] = o;
+        
         return true;
     }
 
-    @Override
-    public boolean addAtIndex(int index) {
-        return false;
-    }
 
     @Override
     public boolean addRange(Object[] oRange) {
@@ -60,10 +62,13 @@ public class LinkedList implements List {
     @Override
     public int getSize() {
         int size = 0;
-        for (Object o : List.oArray
-                ) {
-            size++;
+        if (List.oArray != null) {
+            for (Object o : List.oArray
+                    ) {
+                if (o != null)
+                    size++;
 
+            }
         }
         return size;
     }
@@ -83,7 +88,7 @@ public class LinkedList implements List {
     }
 
     @Override
-    public boolean replace(int index, Object o) {
+    public boolean addAtIndex(int index, Object o) {
         if (getSize() > index && index > 0) {
             List.oArray[index] = o;
             return true;
