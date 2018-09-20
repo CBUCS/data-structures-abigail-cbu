@@ -5,17 +5,37 @@ public class LinkedList implements List {
     private Object[] oArray;
     private int CURRENT_SIZE = 0;
 
-    public LinkedList () {
+    public LinkedList() {
         oArray = new Object[List.STARTING_SIZE];
     }
 
+    /**
+     * Set/re-size the array
+     *
+     * @param size
+     * @return
+     */
     @Override
     public boolean setSize(int size) {
-        return false;
+        int prevSize = getNumObjects();
+        CURRENT_SIZE = size;
+        Object[] tmpArray = new Object[CURRENT_SIZE];
+
+        for (int i = 0; i < prevSize; i++)
+            tmpArray[i] = oArray[i];
+
+        // resize
+        oArray = new Object[CURRENT_SIZE];
+
+        for (int i = 0; i < prevSize; i++)
+            oArray[i] = tmpArray[i];
+
+        return true;
     }
 
     /**
      * Adds Object to the end of the LinkedList
+     *
      * @param o
      * @return true if object was added;
      * false if there is no LinkList to add to
@@ -24,21 +44,21 @@ public class LinkedList implements List {
     public boolean add(Object o) {
         int size = getNumObjects();
 
+        if (size == CURRENT_SIZE)
+            oArray = doubleLength(oArray);
+
         if (size == 0) {
             oArray[size] = o;
             oArray = doubleLength(oArray);
-        }
-        else
-            oArray[size - 1] = o;
-
-        if(getNumObjects() > (CURRENT_SIZE/2))
-            oArray = doubleLength(oArray);
+        } else if (size < CURRENT_SIZE)
+            oArray[size] = o;
 
         return true;
     }
 
     /**
      * Add an entire Object[] to the back of the LinkedList
+     *
      * @param oRange
      * @return true if successful
      */
@@ -49,6 +69,7 @@ public class LinkedList implements List {
 
     /**
      * Removed the last object in LinkedList
+     *
      * @param o
      * @return true if successful
      */
@@ -68,6 +89,7 @@ public class LinkedList implements List {
 
     /**
      * Gets object from specified index
+     *
      * @param index
      * @return can return null if doesn't exist
      */
@@ -78,6 +100,7 @@ public class LinkedList implements List {
 
     /**
      * Removes ojbect at specified index
+     *
      * @param index
      * @return true if successful
      */
@@ -97,6 +120,7 @@ public class LinkedList implements List {
 
     /**
      * Removes all objects in LinkedList
+     *
      * @return new object list
      */
     @Override
@@ -106,6 +130,7 @@ public class LinkedList implements List {
 
     /**
      * Get current size of LinkedList
+     *
      * @return int: size
      */
     @Override
@@ -124,6 +149,7 @@ public class LinkedList implements List {
 
     /**
      * Checks for the first existence of object in LinkedList
+     *
      * @param o
      * @return
      */
@@ -177,12 +203,19 @@ public class LinkedList implements List {
 
     @Override
     public Object[] doubleLength(Object[] oPrevArray) {
+        Object[] newOArray;
         int prevSize = getNumObjects();
-        CURRENT_SIZE = prevSize * 2;
-        Object[] newOArray = new Object[CURRENT_SIZE];
+        if(prevSize != 0) {
+            CURRENT_SIZE = prevSize * 2;
+            newOArray = new Object[CURRENT_SIZE];
 
-        for(int i = 0; i < prevSize; i++)
-            newOArray[i] = oPrevArray[i];
+            for (int i = 0; i < prevSize; i++)
+                newOArray[i] = oPrevArray[i];
+        }
+        else {
+            CURRENT_SIZE = 2;
+            newOArray = new Object[CURRENT_SIZE];
+        }
         return newOArray;
     }
 }
