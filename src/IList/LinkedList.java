@@ -9,7 +9,7 @@ public class LinkedList implements List {
     @Override
     public boolean add(Object o) {
         int size = getSize();
-        
+
         List.oArray[size - 1] = o;
         return true;
     }
@@ -31,12 +31,21 @@ public class LinkedList implements List {
 
     @Override
     public boolean removeAtIndex(int index) {
-        return false;
+        int currentSize = getSize();
+        if (List.oArray[index] != null) {
+            Object[] tmp = List.oArray;
+            for (int i = index; i < currentSize - 2; i++) {
+                List.oArray[i] = tmp[i + 1];
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public boolean removeAll() {
-        return false;
+    public Object[] removeAll() {
+        return new Object[getSize()];
     }
 
     @Override
@@ -52,6 +61,10 @@ public class LinkedList implements List {
 
     @Override
     public boolean contains(Object o) {
+        for (Object x : List.oArray) {
+            if (o == x)
+                return true;
+        }
         return false;
     }
 

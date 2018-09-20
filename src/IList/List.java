@@ -19,7 +19,7 @@ public interface List {
 
     boolean removeAtIndex(int index);
 
-    boolean removeAll();
+    Object[] removeAll();
 
     int getSize();
 

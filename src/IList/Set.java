@@ -3,7 +3,10 @@ package IList;
 public class Set implements List {
     @Override
     public boolean add(Object o) {
-        return false;
+        int size = getSize();
+
+        List.oArray[size - 1] = o;
+        return true;
     }
 
     @Override
@@ -27,8 +30,9 @@ public class Set implements List {
     }
 
     @Override
-    public boolean removeAll() {
-        return false;
+    public Object[] removeAll() {
+        int currentSize = getSize();
+        return new Object[currentSize];
     }
 
     @Override
@@ -49,6 +53,10 @@ public class Set implements List {
 
     @Override
     public boolean contains(Object o) {
+        for (Object x : List.oArray) {
+            if (o == x)
+                return true;
+        }
         return false;
     }
 
