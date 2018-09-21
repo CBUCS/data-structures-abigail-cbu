@@ -19,6 +19,8 @@ public interface List {
 
     int getNumObjects();
 
+    int getNumObjInList(Object[] o);
+
     boolean contains(Object o);
 
     Object get(int index);

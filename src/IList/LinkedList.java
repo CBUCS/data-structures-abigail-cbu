@@ -64,7 +64,12 @@ public class LinkedList implements List {
      */
     @Override
     public boolean addRange(Object[] oRange) {
-        return false;
+        int newSize = getNumObjInList(oRange);
+        for(int i = 0; i < newSize; i++)
+        {
+            add(oRange[i]);
+        }
+        return true;
     }
 
     /**
@@ -125,7 +130,8 @@ public class LinkedList implements List {
      */
     @Override
     public boolean removeAll() {
-        for(Object o : oArray)
+        Object[] tmp = oArray;
+        for(Object o : tmp)
             remove(o);
         return true;
     }
@@ -246,5 +252,18 @@ public class LinkedList implements List {
             newOArray = new Object[CURRENT_SIZE];
         }
         return newOArray;
+    }
+
+    @Override
+    public int getNumObjInList(Object[] o) {
+        int size = 0;
+        if (o != null) {
+            for (Object item : o
+                    ) {
+                if (item != null)
+                    size++;
+            }
+        }
+        return size;
     }
 }

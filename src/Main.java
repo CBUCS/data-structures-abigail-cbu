@@ -31,7 +31,16 @@ public class Main {
         testLinked.add("third");
 
         System.out.println("Size: " + testLinked.getNumObjects());
+        DisplayResults(testLinked);
 
+        testLinked.addAtIndex(1, "fourth");
+
+        System.out.println("Size: " + testLinked.getNumObjects());
+        DisplayResults(testLinked);
+
+        testLinked.addRange(new Object[]{1, 2});
+
+        System.out.println("Size: " + testLinked.getNumObjects());
         DisplayResults(testLinked);
 
         System.out.println("--- Removing ---");

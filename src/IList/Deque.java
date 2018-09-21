@@ -42,6 +42,11 @@ public class Deque implements List {
     }
 
     @Override
+    public int getNumObjInList(Object[] o) {
+        return 0;
+    }
+
+    @Override
     public int getNumObjects() {
         return 0;
     }

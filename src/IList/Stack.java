@@ -37,6 +37,11 @@ public class Stack implements List {
     }
 
     @Override
+    public int getNumObjInList(Object[] o) {
+        return 0;
+    }
+
+    @Override
     public boolean removeAll() {
         return false;
     }

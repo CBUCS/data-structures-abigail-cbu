@@ -41,6 +41,10 @@ public class Set implements List {
         return false;
     }
 
+    @Override
+    public int getNumObjInList(Object[] o) {
+        return 0;
+    }
 
     @Override
     public int getNumObjects() {
