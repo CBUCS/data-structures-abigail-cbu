@@ -10,32 +10,9 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Set/re-size the array
-     *
-     * @param size
-     * @return
-     */
-    public boolean setSize(int size) {
-        int prevSize = size();
-        CURRENT_SIZE = size;
-        Object[] tmpArray = new Object[CURRENT_SIZE];
-
-        for (int i = 0; i < prevSize; i++)
-            tmpArray[i] = oArray[i];
-
-        // resize
-        oArray = new Object[CURRENT_SIZE];
-
-        for (int i = 0; i < prevSize; i++)
-            oArray[i] = tmpArray[i];
-
-        return true;
-    }
-
-    /**
      * Adds Object to the end of the LinkedList
      *
-     * @param o
+     * @param item
      * @return true if object was added;
      * false if there is no LinkList to add to
      */
@@ -71,9 +48,9 @@ public class LinkedList<T> implements List<T> {
     }
 
     /**
-     * Removed the last object in LinkedList
+     * Removed first occurrence of item in linked list
      *
-     * @param o
+     * @param item
      * @return true if successful
      */
     public boolean remove(T item) {
@@ -87,7 +64,7 @@ public class LinkedList<T> implements List<T> {
                 pastNode = currentNode;
                 currentNode = currentNode.next;
             }
-            pastNode.next = currentNode.next;
+            pastNode.next = currentNode.next; // remove item from list by pointing to next item
 
             CURRENT_SIZE--;
             return true;
@@ -128,16 +105,28 @@ public class LinkedList<T> implements List<T> {
      * @return true if successful
      */
     public boolean removeAtIndex(int index) {
-        int currentSize = size();
-        if (oArray[index] != null) {
-            Object[] tmp = oArray;
-            for (int i = index; i < currentSize; i++) {
-                oArray[i] = tmp[i + 1];
-            }
+        if (size() < index || head == null)
+            return false; // can't remove at an index that doesn't exist
+        else if (index == 0) {
+            head = head.next; // would work if next is null?
             return true;
-        } else {
-            return false;
+        } else if(head.next != null) {
+            Node<T> currentNode = head;
+            Node<T> pastNode = null;
+            int counter = 1;
+
+            while (currentNode != null && counter != index) {
+                pastNode = currentNode;
+                currentNode = currentNode.next;
+            }
+
+            pastNode.next = currentNode.next; // remove item from list by pointing to next item
+
+            CURRENT_SIZE--;
+            return true;
+
         }
+        return false;
     }
 
     /**
@@ -162,7 +151,7 @@ public class LinkedList<T> implements List<T> {
     /**
      * Checks for the first existence of object in LinkedList
      *
-     * @param o
+     * @param item
      * @return
      */
     public boolean contains(T item) {
@@ -185,14 +174,16 @@ public class LinkedList<T> implements List<T> {
      * Add Object at specified index into LinkedList
      *
      * @param index
-     * @param o
+     * @param item
      * @return
      */
     public boolean insertAt(int index, T item) {
-        if (index == 0) {
+        if(size() < index || head == null)
+            return false;
+        else if (index == 0) {
             head.item = item;
             return true;
-        } else {
+        } else if (head.next != null) {
             Node<T> tmpNode = head.next;
             int counter = 1;
 
@@ -207,6 +198,8 @@ public class LinkedList<T> implements List<T> {
 
             return false;
         }
+        else
+            return false;
     }
 
     /**
