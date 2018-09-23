@@ -22,6 +22,8 @@ public class Main {
     public static void main(String[] args) {
 
         //List
+
+        // 1. Linked List
         List testLinked = new LinkedList();
 
         System.out.println("--- Adding ---");
@@ -30,17 +32,12 @@ public class Main {
         testLinked.add("second");
         testLinked.add("third");
 
-        System.out.println("Size: " + testLinked.getNumObjects());
+        System.out.println("Size: " + testLinked.size());
         DisplayResults(testLinked);
 
-        testLinked.addAtIndex(1, "fourth");
+        testLinked.insertAt(1, "fourth");
 
-        System.out.println("Size: " + testLinked.getNumObjects());
-        DisplayResults(testLinked);
-
-        testLinked.addRange(new Object[]{1, 2});
-
-        System.out.println("Size: " + testLinked.getNumObjects());
+        System.out.println("Size: " + testLinked.size());
         DisplayResults(testLinked);
 
         System.out.println("--- Removing ---");
@@ -54,13 +51,13 @@ public class Main {
 
         DisplayResults(testLinked);
 
-        testLinked.removeAll();
+        testLinked.clear();
 
         System.out.println("isEmpty(): " + testLinked.isEmpty());
     }
 
     public static void DisplayResults(List x) {
-        for(int i = 0; i < x.getNumObjects(); i++)
+        for(int i = 0; i < x.size(); i++)
             System.out.println(i + ": " + x.get(i));
 
     }

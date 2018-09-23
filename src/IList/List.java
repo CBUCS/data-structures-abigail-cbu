@@ -1,36 +1,23 @@
 package IList;
 
-public interface List {
-    static final int STARTING_SIZE = 2;
+public interface List<T> {
 
-    boolean setSize(int size);
+    boolean add(T item);
 
-    boolean add(Object o);
+    boolean insertAt(int index, T item);
 
-    boolean addAtIndex(int index, Object o);
-
-    boolean addRange(Object[] oRange);
-
-    boolean remove(Object o);
+    boolean remove(T item);
 
     boolean removeAtIndex(int index);
 
-    boolean removeAll();
+    boolean clear();
 
-    int getNumObjects();
+    int size();
 
-    int getNumObjInList(Object[] o);
+    boolean contains(T item);
 
-    boolean contains(Object o);
-
-    Object get(int index);
-
-    boolean swap(int index1, int index2);
-
-    int indexOf(Object o);
+    T get(int index);
 
     boolean isEmpty();
-
-    Object[] doubleLength(Object[] oPrevArray);
 
 }
