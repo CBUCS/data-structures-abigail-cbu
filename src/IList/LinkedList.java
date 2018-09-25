@@ -7,6 +7,7 @@ public class LinkedList<T> implements List<T> {
 
     public LinkedList() {
         this.head = null;
+        this.CURRENT_SIZE = 0;
     }
 
     /**
@@ -86,15 +87,11 @@ public class LinkedList<T> implements List<T> {
             Node<T> tmpNode = head.next;
             int counter = 1;
 
-            while (tmpNode.next != null) {
-                if (counter == index) {
-                    return tmpNode.item;
-                } else {
-                    tmpNode = tmpNode.next;
-                }
+            while (tmpNode.next != null && counter != index) {
+                tmpNode = tmpNode.next;
             }
 
-            return null; // there is no item at specified index
+            return tmpNode.item; // there is no item at specified index
         }
     }
 
@@ -110,7 +107,7 @@ public class LinkedList<T> implements List<T> {
         else if (index == 0) {
             head = head.next; // would work if next is null?
             return true;
-        } else if(head.next != null) {
+        } else if (head.next != null) {
             Node<T> currentNode = head;
             Node<T> pastNode = null;
             int counter = 1;
@@ -136,6 +133,7 @@ public class LinkedList<T> implements List<T> {
      */
     public boolean clear() {
         head = null;
+        CURRENT_SIZE = 0;
         return true;
     }
 
@@ -145,7 +143,7 @@ public class LinkedList<T> implements List<T> {
      * @return int: size
      */
     public int size() {
-        return CURRENT_SIZE;
+        return this.CURRENT_SIZE;
     }
 
     /**
@@ -178,7 +176,7 @@ public class LinkedList<T> implements List<T> {
      * @return
      */
     public boolean insertAt(int index, T item) {
-        if(size() < index || head == null)
+        if (size() < index || head == null)
             return false;
         else if (index == 0) {
             head.item = item;
@@ -197,8 +195,7 @@ public class LinkedList<T> implements List<T> {
             }
 
             return false;
-        }
-        else
+        } else
             return false;
     }
 

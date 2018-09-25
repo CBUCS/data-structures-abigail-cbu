@@ -1,5 +1,6 @@
 import IList.LinkedList;
 import IList.List;
+import IList.Queue;
 
 /**
  * Developer: Abigail Lu
@@ -26,6 +27,7 @@ public class Main {
         // 1. Linked List
         List testLinked = new LinkedList();
 
+        System.out.println("--- Linked List ---");
         System.out.println("--- Adding ---");
 
         testLinked.add("first");
@@ -54,6 +56,45 @@ public class Main {
         testLinked.clear();
 
         System.out.println("isEmpty(): " + testLinked.isEmpty());
+
+        DisplayResults(testLinked);
+
+        // 2. Queue
+        Queue testQueue = new Queue();
+        System.out.println("--- Queue ---");
+        System.out.println("--- Adding ---");
+
+        testQueue.add("first");
+        testQueue.add("second");
+        testQueue.add("third");
+
+        System.out.println("Size: " + testQueue.size());
+        DisplayResults(testQueue);
+
+        testQueue.insertAt(1, "fourth");
+
+        System.out.println("Size: " + testQueue.size());
+        DisplayResults(testQueue);
+
+        System.out.println("--- Removing ---");
+        testQueue.remove("second");
+
+        DisplayResults(testQueue);
+
+        System.out.println("isEmpty(): " + testQueue.isEmpty());
+
+        testQueue.removeAtIndex(0);
+
+        DisplayResults(testQueue);
+
+        testQueue.clear();
+
+        System.out.println("isEmpty(): " + testQueue.isEmpty());
+
+        DisplayResults(testQueue);
+
+
+
     }
 
     public static void DisplayResults(List x) {
