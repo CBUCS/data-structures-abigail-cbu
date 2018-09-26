@@ -4,7 +4,7 @@ public class Deque<T> implements List<T> {
 
     private List<T> Deque;
 
-    private Deque() {
+    public Deque() {
         Deque = new Queue<T>();
     }
 
@@ -18,6 +18,10 @@ public class Deque<T> implements List<T> {
 
     public boolean remove(T item) {
         return Deque.remove(item);
+    }
+
+    public boolean remove() {
+        return Deque.removeAtIndex(0);
     }
 
     public boolean removeAtIndex(int index) {
