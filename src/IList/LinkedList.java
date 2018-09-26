@@ -101,7 +101,7 @@ public class LinkedList<T> implements List<T> {
      * @return true if successful
      */
     public boolean removeAtIndex(int index) {
-        if (size() < index || head == null)
+        if (size() < index + 1 || head == null)
             return false; // can't remove at an index that doesn't exist
         else if (index == 0) {
             Node<T> tmpNode = head;
