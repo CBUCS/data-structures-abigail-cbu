@@ -2,7 +2,7 @@ package IList;
 
 public class Queue<T> implements List<T> {
 
-    private LinkedList<T> Queue;
+    private List<T> Queue;
 
     public Queue() {
         Queue = new LinkedList<T>();
