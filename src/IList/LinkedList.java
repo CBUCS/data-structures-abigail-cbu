@@ -84,11 +84,10 @@ public class LinkedList<T> implements List<T> {
         else if (index == 0) {
             return head.item;
         } else {
-            Node<T> tmpNode = head.next;
-            int counter = 1;
+            Node<T> tmpNode = head;
 
-            while (tmpNode.next != null && counter != index) {
-                tmpNode = tmpNode.next;
+            for(int i = 0; i < index; i++) {
+            tmpNode = tmpNode.next;
             }
 
             return tmpNode.item; // there is no item at specified index
@@ -105,7 +104,9 @@ public class LinkedList<T> implements List<T> {
         if (size() < index || head == null)
             return false; // can't remove at an index that doesn't exist
         else if (index == 0) {
-            head = head.next; // would work if next is null?
+            Node<T> tmpNode = head;
+            head = tmpNode.next; // todo: does this work if next is null?
+            CURRENT_SIZE--;
             return true;
         } else if (head.next != null) {
             Node<T> currentNode = head;
@@ -123,7 +124,9 @@ public class LinkedList<T> implements List<T> {
             return true;
 
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     /**
@@ -132,8 +135,8 @@ public class LinkedList<T> implements List<T> {
      * @return new object list
      */
     public boolean clear() {
-        head = null;
-        CURRENT_SIZE = 0;
+        this.head = null;
+        this.CURRENT_SIZE = 0;
         return true;
     }
 

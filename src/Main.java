@@ -67,6 +67,10 @@ public class Main {
         testQueue.add("first");
         testQueue.add("second");
         testQueue.add("third");
+        testQueue.add(1);
+        testQueue.add(2);
+        testQueue.add(3);
+
 
         System.out.println("Size: " + testQueue.size());
         DisplayResults(testQueue);
@@ -77,13 +81,15 @@ public class Main {
         DisplayResults(testQueue);
 
         System.out.println("--- Removing ---");
-        testQueue.remove("second");
+        testQueue.remove();
+        testQueue.remove(2);
+        testQueue.remove(3);
 
         DisplayResults(testQueue);
 
         System.out.println("isEmpty(): " + testQueue.isEmpty());
 
-        testQueue.removeAtIndex(0);
+        testQueue.removeAtIndex(3);
 
         DisplayResults(testQueue);
 

@@ -23,13 +23,17 @@ public class Queue<T> implements List<T> {
         return Queue.insertAt(index, item);
     }
 
+    public boolean remove() {
+        return Queue.removeAtIndex(0);
+    }
+
     /**
      * First index is always removed
      * @param item
      * @return
      */
     public boolean remove(T item) {
-        return Queue.removeAtIndex(0);
+        return Queue.remove(item);
     }
 
     public boolean removeAtIndex(int index) {
