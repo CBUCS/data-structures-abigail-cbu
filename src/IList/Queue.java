@@ -1,73 +1,68 @@
 package IList;
 
-public class Queue implements List {
-    @Override
-    public Object get(int index) {
-        return null;
+public class Queue<T> implements List<T> {
+
+    private List<T> Queue;
+
+    public Queue() {
+        Queue = new LinkedList<T>();
     }
 
-    @Override
-    public boolean setSize(int size) {
-        return false;
+    /**
+     * Adds Object to the end of the Queue
+     *
+     * @param item
+     * @return true if object was added;
+     * false if there is no LinkList to add to
+     */
+    public boolean add(T item) {
+        return Queue.add(item);
     }
 
-    @Override
-    public boolean add(Object o) {
-        return false;
+    public boolean insertAt(int index, T item) {
+        return Queue.insertAt(index, item);
     }
 
-    @Override
-    public boolean addAtIndex(int index, Object o) {
-        return false;
+    public boolean remove() {
+        return Queue.removeAtIndex(0);
     }
 
-    @Override
-    public boolean addRange(Object[] oRange) {
-        return false;
+    /**
+     * First index is always removed
+     * @param item
+     * @return
+     */
+    public boolean remove(T item) {
+        return Queue.remove(item);
     }
 
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
     public boolean removeAtIndex(int index) {
-        return false;
+        return Queue.removeAtIndex(index);
     }
 
-    @Override
-    public Object[] removeAll() {
-        return new Object[0];
+    public boolean clear() {
+        return Queue.clear();
     }
 
-    @Override
-    public int getNumObjects() {
-        return 0;
+    public int size() {
+        return Queue.size();
     }
 
-    @Override
-    public boolean contains(Object o) {
-        return false;
+    public boolean contains(T item) {
+        return Queue.contains(item);
     }
 
-    @Override
-    public boolean swap(int index1, int index2) {
-        return false;
+    /**
+     * Gets object from specified index
+     *
+     * @param index
+     * @return can return null if doesn't exist
+     */
+    public T get(int index) {
+        return Queue.get(index);
     }
 
-    @Override
-    public int indexOf(Object o) {
-        return 0;
-    }
-
-    @Override
     public boolean isEmpty() {
-        return false;
-    }
-
-    @Override
-    public Object[] doubleLength(Object[] oPrevArray) {
-        return new Object[0];
+        return Queue.isEmpty();
     }
 }

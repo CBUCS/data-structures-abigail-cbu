@@ -1,90 +1,75 @@
 package IList;
 
-public class LinkedList implements List {
+public class LinkedList<T> implements List<T> {
 
-    private Object[] oArray;
     private int CURRENT_SIZE = 0;
+    private Node<T> head;
 
     public LinkedList() {
-        oArray = new Object[List.STARTING_SIZE];
-    }
-
-    /**
-     * Set/re-size the array
-     *
-     * @param size
-     * @return
-     */
-    @Override
-    public boolean setSize(int size) {
-        int prevSize = getNumObjects();
-        CURRENT_SIZE = size;
-        Object[] tmpArray = new Object[CURRENT_SIZE];
-
-        for (int i = 0; i < prevSize; i++)
-            tmpArray[i] = oArray[i];
-
-        // resize
-        oArray = new Object[CURRENT_SIZE];
-
-        for (int i = 0; i < prevSize; i++)
-            oArray[i] = tmpArray[i];
-
-        return true;
+        this.head = null;
+        this.CURRENT_SIZE = 0;
     }
 
     /**
      * Adds Object to the end of the LinkedList
      *
-     * @param o
+     * @param item
      * @return true if object was added;
      * false if there is no LinkList to add to
      */
-    @Override
-    public boolean add(Object o) {
-        int size = getNumObjects();
+    public boolean add(T item) {
+        int size = size();
+        Node<T> newNode = new Node<T>();
+        newNode.item = item;
+        newNode.next = null;
 
-        if (size == CURRENT_SIZE)
-            oArray = doubleLength(oArray);
+        if (size == 0 || head == null) {
+            addFirst(newNode);
+        } else {
+            Node<T> tmpNode = head;
+            // traverse through linked list to set next node
+            while (tmpNode.next != null)
+                tmpNode = tmpNode.next;
 
-        if (size == 0) {
-            oArray[size] = o;
-            oArray = doubleLength(oArray);
-        } else if (size < CURRENT_SIZE)
-            oArray[size] = o;
+            tmpNode.next = newNode;
+        }
 
+        CURRENT_SIZE++;
         return true;
     }
 
-    /**
-     * Add an entire Object[] to the back of the LinkedList
-     *
-     * @param oRange
-     * @return true if successful
-     */
-    @Override
-    public boolean addRange(Object[] oRange) {
-        return false;
+    public void addFirst(Node<T> newNode) {
+        head = newNode;
+        head.next = null;
+    }
+
+    public void addLast(Node<T> newNode) {
+//        tail = newNode;
+//        tail.next = head;
     }
 
     /**
-     * Removed the last object in LinkedList
+     * Removed first occurrence of item in linked list
      *
-     * @param o
+     * @param item
      * @return true if successful
      */
-    @Override
-    public boolean remove(Object o) {
-        if (getNumObjects() > 0) {
-            if (contains(o)) {
-                int i = indexOf(o);
-                if (i < 0)
-                    return false;
-                else
-                    removeAtIndex(i);
+    public boolean remove(T item) {
+        if (head == null || size() == 0 || !contains(item)) {
+            return false;
+        } else {
+            Node<T> currentNode = head;
+            Node<T> pastNode = null;
+
+            while (currentNode != null && currentNode.item != item) {
+                pastNode = currentNode;
+                currentNode = currentNode.next;
             }
+            pastNode.next = currentNode.next; // remove item from list by pointing to next item
+
+            CURRENT_SIZE--;
+            return true;
         }
-        return false;
     }
 
     /**
@@ -93,9 +78,20 @@ public class LinkedList implements List {
      * @param index
      * @return can return null if doesn't exist
      */
-    @Override
-    public Object get(int index) {
-        return oArray[index];
+    public T get(int index) {
+        if (index > size())
+            return null; // doesn't exists
+        else if (index == 0) {
+            return head.item;
+        } else {
+            Node<T> tmpNode = head;
+
+            for(int i = 0; i < index; i++) {
+            tmpNode = tmpNode.next;
+            }
+
+            return tmpNode.item; // there is no item at specified index
+        }
     }
 
     /**
@@ -104,28 +100,44 @@ public class LinkedList implements List {
      * @param index
      * @return true if successful
      */
-    @Override
     public boolean removeAtIndex(int index) {
-        int currentSize = getNumObjects();
-        if (oArray[index] != null) {
-            Object[] tmp = oArray;
-            for (int i = index; i < currentSize - 2; i++) {
-                oArray[i] = tmp[i + 1];
-            }
+        if (size() < index + 1 || head == null)
+            return false; // can't remove at an index that doesn't exist
+        else if (index == 0) {
+            Node<T> tmpNode = head;
+            head = tmpNode.next; // todo: does this work if next is null?
+            CURRENT_SIZE--;
             return true;
-        } else {
+        } else if (head.next != null) {
+            Node<T> currentNode = head;
+            Node<T> pastNode = null;
+            int counter = 1;
+
+            while (currentNode != null && counter != index) {
+                pastNode = currentNode;
+                currentNode = currentNode.next;
+            }
+
+            pastNode.next = currentNode.next; // remove item from list by pointing to next item
+
+            CURRENT_SIZE--;
+            return true;
+
+        }
+        else{
             return false;
         }
     }
 
     /**
-     * Removes all objects in LinkedList
+     * Resets head node.
      *
      * @return new object list
      */
-    @Override
-    public Object[] removeAll() {
-        return new Object[getNumObjects()];
+    public boolean clear() {
+        this.head = null;
+        this.CURRENT_SIZE = 0;
+        return true;
     }
 
     /**
@@ -133,89 +145,72 @@ public class LinkedList implements List {
      *
      * @return int: size
      */
-    @Override
-    public int getNumObjects() {
-        int size = 0;
-        if (oArray != null) {
-            for (Object o : oArray
-                    ) {
-                if (o != null)
-                    size++;
-
-            }
-        }
-        return size;
+    public int size() {
+        return this.CURRENT_SIZE;
     }
 
     /**
      * Checks for the first existence of object in LinkedList
      *
-     * @param o
+     * @param item
      * @return
      */
-    @Override
-    public boolean contains(Object o) {
-        for (Object x : oArray) {
-            if (o == x)
+    public boolean contains(T item) {
+        if (head == null)
+            return false; // items definitely doesn't exist
+
+        Node<T> tmpNode = head;
+
+        while (tmpNode != null) {
+            if (tmpNode.item == item)
                 return true;
+            else
+                tmpNode = tmpNode.next;
         }
+
         return false;
     }
 
-    @Override
-    public boolean addAtIndex(int index, Object o) {
-        if (getNumObjects() > index && index > 0) {
-            oArray[index] = o;
+    /**
+     * Add Object at specified index into LinkedList
+     *
+     * @param index
+     * @param item
+     * @return
+     */
+    public boolean insertAt(int index, T item) {
+        if (size() < index || head == null)
+            return false;
+        else if (index == 0) {
+            head.item = item;
             return true;
-        }
-        return false;
-    }
+        } else if (head.next != null) {
+            Node<T> tmpNode = head.next;
+            int counter = 1;
 
-    @Override
-    public boolean swap(int index1, int index2) {
-        if (oArray[index1] != null && oArray[index2] != null) {
-            Object tmp = oArray[index1];
-            oArray[index1] = oArray[index2];
-            oArray[index2] = tmp;
-            return true;
-        }
-        return false;
-    }
+            while (tmpNode.next != null) {
+                if (counter == index) {
+                    tmpNode.item = item;
+                    return true;
+                } else {
+                    tmpNode = tmpNode.next;
+                }
+            }
 
-    @Override
-    public int indexOf(Object o) {
-        int counter = 0;
-        for (Object x : oArray) {
-            if (o == x)
-                return counter;
-            counter++;
-        }
-        return -1;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        if (oArray == null || getNumObjects() == 0)
-            return true;
-        else
+            return false;
+        } else
             return false;
     }
 
-    @Override
-    public Object[] doubleLength(Object[] oPrevArray) {
-        Object[] newOArray;
-        int prevSize = getNumObjects();
-        if(prevSize != 0) {
-            CURRENT_SIZE = prevSize * 2;
-            newOArray = new Object[CURRENT_SIZE];
-
-            for (int i = 0; i < prevSize; i++)
-                newOArray[i] = oPrevArray[i];
-        }
-        else {
-            CURRENT_SIZE = 2;
-            newOArray = new Object[CURRENT_SIZE];
-        }
-        return newOArray;
+    /**
+     * Checks if there are any objects in the linkedlist
+     *
+     * @return true if there are no objects in linkedlist
+     */
+    public boolean isEmpty() {
+        if (head == null || size() == 0)
+            return true;
+        else
+            return false;
     }
 }

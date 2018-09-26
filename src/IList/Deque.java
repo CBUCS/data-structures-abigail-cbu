@@ -1,73 +1,46 @@
 package IList;
 
-public class Deque implements List {
-    @Override
-    public Object get(int index) {
-        return null;
+public class Deque<T> implements List<T> {
+
+    private List<T> Deque;
+
+    private Deque() {
+        Deque = new Queue<T>();
     }
 
-    @Override
-    public boolean setSize(int size) {
+    public boolean add(T item) {
         return false;
     }
 
-    @Override
-    public boolean add(Object o) {
+    public boolean insertAt(int index, T item) {
         return false;
     }
 
-    @Override
-    public boolean addAtIndex(int index, Object o) {
+    public boolean remove(T item) {
         return false;
     }
 
-    @Override
-    public boolean addRange(Object[] oRange) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
     public boolean removeAtIndex(int index) {
         return false;
     }
 
-    @Override
-    public Object[] removeAll() {
-        return new Object[0];
-    }
-
-    @Override
-    public int getNumObjects() {
-        return 0;
-    }
-
-    @Override
-    public boolean contains(Object o) {
+    public boolean clear() {
         return false;
     }
 
-    @Override
-    public boolean swap(int index1, int index2) {
-        return false;
-    }
-
-    @Override
-    public int indexOf(Object o) {
+    public int size() {
         return 0;
     }
 
-    @Override
+    public boolean contains(T item) {
+        return false;
+    }
+
+    public T get(int index) {
+        return null;
+    }
+
     public boolean isEmpty() {
         return false;
-    }
-
-    @Override
-    public Object[] doubleLength(Object[] oPrevArray) {
-        return new Object[0];
     }
 }
