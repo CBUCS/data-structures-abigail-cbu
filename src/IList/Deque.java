@@ -1,5 +1,7 @@
 package IList;
 
+//todo: redo...I don't think I did this right...
+
 public class Deque<T> implements List<T> {
 
     private List<T> Deque;
