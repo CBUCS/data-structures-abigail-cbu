@@ -1,3 +1,4 @@
+import IList.Deque;
 import IList.LinkedList;
 import IList.List;
 import IList.Queue;
@@ -59,6 +60,8 @@ public class Main {
 
         DisplayResults(testLinked);
 
+
+
         // 2. Queue
         Queue testQueue = new Queue();
         System.out.println("--- Queue ---");
@@ -99,6 +102,47 @@ public class Main {
 
         DisplayResults(testQueue);
 
+
+
+        // 3. deque
+        Deque testDeque = new Deque();
+        System.out.println("--- Queue ---");
+        System.out.println("--- Adding ---");
+
+        testDeque.add("first");
+        testDeque.add("second");
+        testDeque.add("third");
+        testDeque.add(1);
+        testDeque.add(2);
+        testDeque.add(3);
+
+
+        System.out.println("Size: " + testDeque.size());
+        DisplayResults(testDeque);
+
+        testDeque.insertAt(1, "fourth");
+
+        System.out.println("Size: " + testDeque.size());
+        DisplayResults(testDeque);
+
+        System.out.println("--- Removing ---");
+        testDeque.remove();
+        testDeque.remove(2);
+        testDeque.remove(3);
+
+        DisplayResults(testDeque);
+
+        System.out.println("isEmpty(): " + testDeque.isEmpty());
+
+        testDeque.removeAtIndex(3);
+
+        DisplayResults(testDeque);
+
+        testDeque.clear();
+
+        System.out.println("isEmpty(): " + testDeque.isEmpty());
+
+        DisplayResults(testDeque);
 
 
     }

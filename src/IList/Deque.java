@@ -1,46 +1,52 @@
 package IList;
 
+//todo: redo...I don't think I did this right...
+
 public class Deque<T> implements List<T> {
 
     private List<T> Deque;
 
-    private Deque() {
+    public Deque() {
         Deque = new Queue<T>();
     }
 
     public boolean add(T item) {
-        return false;
+        return Deque.add(item);
     }
 
     public boolean insertAt(int index, T item) {
-        return false;
+        return Deque.insertAt(index, item);
     }
 
     public boolean remove(T item) {
-        return false;
+        return Deque.remove(item);
+    }
+
+    public boolean remove() {
+        return Deque.removeAtIndex(0);
     }
 
     public boolean removeAtIndex(int index) {
-        return false;
+        return Deque.removeAtIndex(index);
     }
 
     public boolean clear() {
-        return false;
+        return Deque.clear();
     }
 
     public int size() {
-        return 0;
+        return Deque.size();
     }
 
     public boolean contains(T item) {
-        return false;
+        return Deque.contains(item);
     }
 
     public T get(int index) {
-        return null;
+        return Deque.get(index);
     }
 
     public boolean isEmpty() {
-        return false;
+        return Deque.isEmpty();
     }
 }

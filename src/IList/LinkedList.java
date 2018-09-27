@@ -86,8 +86,8 @@ public class LinkedList<T> implements List<T> {
         } else {
             Node<T> tmpNode = head;
 
-            for(int i = 0; i < index; i++) {
-            tmpNode = tmpNode.next;
+            for (int i = 0; i < index; i++) {
+                tmpNode = tmpNode.next;
             }
 
             return tmpNode.item; // there is no item at specified index
@@ -118,13 +118,15 @@ public class LinkedList<T> implements List<T> {
                 currentNode = currentNode.next;
             }
 
-            pastNode.next = currentNode.next; // remove item from list by pointing to next item
+            if (currentNode != null)
+                pastNode.next = currentNode.next; // remove item from list by pointing to next item
+            else
+                pastNode.next = null;
 
             CURRENT_SIZE--;
             return true;
 
-        }
-        else{
+        } else {
             return false;
         }
     }
