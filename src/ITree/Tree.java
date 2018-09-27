@@ -1,11 +1,15 @@
 package ITree;
 
-public interface Tree {
+public interface Tree<T> {
 
-    boolean add (Object o);
-    boolean remove (Object o);
-    boolean contains (Object o);
-    int checkSize ();
-    int getCurrentIndex (Object o);
+    boolean insert(T item);
+
+    boolean find(T item);
+
+    void dumpDFS(T item); // where dfs stands for Depth First Search
+
+    void dumpBFS(T item); // where bfs stands for Breadth First Search
+
+    int size();
 
 }

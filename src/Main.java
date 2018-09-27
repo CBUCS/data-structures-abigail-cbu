@@ -2,6 +2,8 @@ import IList.Deque;
 import IList.LinkedList;
 import IList.List;
 import IList.Queue;
+import ITree.BinaryTree;
+import ITree.Tree;
 
 /**
  * Developer: Abigail Lu
@@ -145,6 +147,17 @@ public class Main {
         DisplayResults(testDeque);
 
 
+
+        // Trees //
+        // 1. Binary Tree
+        BinaryTree bt = new BinaryTree();
+        bt.insert(1);
+        bt.insert(2);
+        bt.insert(3);
+
+        DisplayTreeResults(bt);
+
+
     }
 
     public static void DisplayResults(List x) {
@@ -152,4 +165,11 @@ public class Main {
             System.out.println(i + ": " + x.get(i));
 
     }
+
+    public static void DisplayTreeResults(Tree x) {
+        for(int i = 0; i < x.size(); i++)
+            System.out.println(i + ": " + x.get(i));
+
+    }
+
 }
