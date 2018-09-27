@@ -33,6 +33,8 @@ public class BinaryTree<T> implements Tree<T>{
         {
             Node<T> tmpNode = root;
             int index = 0;
+
+            // this is putting the new nodes from left to right of tree
             while(index < CURRENT_SIZE) {
                 if(tmpNode.left == null)
                 {
