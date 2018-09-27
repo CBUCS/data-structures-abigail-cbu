@@ -76,8 +76,6 @@ public class BinaryTree<T> implements Tree<T>{
         } else {
             Node<T> tmpNode = root;
 
-
-
             return tmpNode.item; // there is no item at specified index
         }
     }

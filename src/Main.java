@@ -150,6 +150,7 @@ public class Main {
 
         // Trees //
         // 1. Binary Tree
+        System.out.println("--- Binary Tree ---");
         BinaryTree bt = new BinaryTree();
         bt.insert(1);
         bt.insert(2);

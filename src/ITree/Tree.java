@@ -12,4 +12,6 @@ public interface Tree<T> {
 
     int size();
 
+    T get(int index);
+
 }
